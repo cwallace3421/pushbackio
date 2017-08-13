@@ -1,0 +1,70 @@
+generatefloor: function() {
+		let seed = [false, true, true, false, true, true, false, true];
+		let data = '';
+		let xcount = 1;
+		let ycount = 1;
+
+		for (var y = 0; y < _.WORLDSIZE; y++) {
+			if (ycount > 3) {
+				ycount = 1;
+			}
+
+			for (var x = 0; x < _.WORLDSIZE; x++) {
+				if (xcount > 3) {
+					xcount = 1;
+				}
+
+				let keepnormal = GAME.rnd.between(0, seed.length);
+
+				if (ycount == 1) {
+					if (xcount == 1) {
+						data += keepnormal ? 0 : 9;
+					}
+					if (xcount == 2) {
+						data += keepnormal ? 1 : 10;
+					}
+					if (xcount == 3) {
+						data += keepnormal ? 2 : 11;
+					}
+				}
+
+				if (ycount == 2) {
+					if (xcount == 1) {
+						data += keepnormal ? 3 : 12;
+					}
+					if (xcount == 2) {
+						data += keepnormal ? 4 : 13;
+					}
+					if (xcount == 3) {
+						data += keepnormal ? 5 : 14;
+					}
+				}
+
+				if (ycount == 3) {
+					if (xcount == 1) {
+						data += keepnormal ? 6 : 15;
+					}
+					if (xcount == 2) {
+						data += keepnormal ? 7 : 16;
+					}
+					if (xcount == 3) {
+						data += keepnormal ? 8 : 17;
+					}
+				}
+
+				if (x < _.WORLDSIZE - 1) {
+					data += ',';
+				}
+
+				xcount++;
+			}
+
+			if (y < _.WORLDSIZE - 1) {
+				data += "\n";
+			}
+
+			ycount++;
+		}
+
+		return data;
+	},
